@@ -1,5 +1,9 @@
 import {readFile, writeFile} from "fs/promises"
 
+import {Injectable} from "@nestjs/common"
+import {CreateMessageDto} from "./dtos/create-message.dto"
+
+@Injectable()
 export class MessagesRepo {
 
 async findOne(id: string) {
@@ -19,7 +23,7 @@ async findAll() {
     
 
 
-async createMessage(message: string) {
+async createMessage(message: string | CreateMessageDto) {
 
     const contents = await readFile('messages.json', 'utf8');
     const messages = JSON.parse(contents);

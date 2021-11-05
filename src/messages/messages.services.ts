@@ -1,12 +1,15 @@
+
+import {Injectable} from "@nestjs/common"
+import { CreateMessageDto } from "./dtos/create-message.dto";
 import {MessagesRepo} from "./messages.repository"
 
+
+@Injectable()
 export class MessagesService {
 
-messagesRepo: MessagesRepo
 
-constructor(){
+constructor(public messagesRepo: MessagesRepo){
 
-    this.messagesRepo = new MessagesRepo();
 }
 
 findOne(id: string){
@@ -15,14 +18,14 @@ return this.messagesRepo.findOne(id);
 
 }
 
-findAll(id: string){
+findAll(){
 
 return this.messagesRepo.findAll();
 
 }
 
 
-create(content: string){
+create(content: string | CreateMessageDto){
 
 return this.messagesRepo.createMessage(content);
 
